@@ -205,25 +205,39 @@
         // Touch/swipe support
         let touchStartX = 0;
         let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
 
-        document.addEventListener('touchstart', (e) => {
+        const galleryModal = document.getElementById('gallery-modal');
+        
+        galleryModal.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
-        });
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
 
-        document.addEventListener('touchend', (e) => {
+        galleryModal.addEventListener('touchend', (e) => {
             if (!currentTrip) return;
             touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
             handleSwipe();
-        });
+        }, { passive: true });
 
         function handleSwipe() {
             const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) changePhoto(1); // Swipe left, next photo
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+            
+            // Solo detectar swipe horizontal si es más pronunciado que el vertical
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > swipeThreshold) {
+                if (diffX > 0) changePhoto(1); // Swipe left, next photo
                 else changePhoto(-1); // Swipe right, prev photo
             }
         }
+        
+        // Prevent context menu on images
+        document.getElementById('gallery-photo').addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
     </script>
 </body>
 </html>
