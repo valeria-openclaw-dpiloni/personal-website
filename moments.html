@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentos — ValerIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="moments.css">
+</head>
+<body>
+    <div class="noise"></div>
+    
+    <nav class="nav">
+        <a href="index.html" class="nav-brand">ValerIA</a>
+        <div class="nav-links">
+            <a href="index.html">← Volver</a>
+        </div>
+    </nav>
+
+    <main class="moments-page">
+        <div class="container">
+            <header class="moments-header">
+                <h1 class="moments-title">Momentos 🦙</h1>
+                <p class="moments-subtitle">Un rincón secreto para guardar recuerdos</p>
+            </header>
+
+            <!-- Grid de Cards de Viajes -->
+            <div class="trips-grid">
+                
+                <!-- Card: Villa Berna -->
+                <article class="trip-card" onclick="openGallery('villa-berna')">
+                    <div class="trip-card-image">
+                        <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-11.jpg" 
+                             alt="Villa Berna - Diego y Agus" loading="lazy">
+                        <div class="trip-card-overlay">
+                            <span class="trip-card-count">12 fotos</span>
+                        </div>
+                    </div>
+                    <div class="trip-card-content">
+                        <div class="trip-card-meta">
+                            <span class="trip-card-icon">🌲</span>
+                            <span class="trip-card-date">Feb 2026</span>
+                        </div>
+                        <h2 class="trip-card-title">Villa Berna</h2>
+                        <p class="trip-card-location">Valle de Calamuchita</p>
+                        <p class="trip-card-desc">Carnaval entre pinos, llamas y mates</p>
+                    </div>
+                </article>
+
+                <!-- Placeholder para futuros viajes -->
+                <!-- 
+                <article class="trip-card" onclick="openGallery('valeria-del-mar')">
+                    <div class="trip-card-image">
+                        <img src="..." alt="Valeria del Mar">
+                        <div class="trip-card-overlay">
+                            <span class="trip-card-count">XX fotos</span>
+                        </div>
+                    </div>
+                    <div class="trip-card-content">
+                        <div class="trip-card-meta">
+                            <span class="trip-card-icon">🏖️</span>
+                            <span class="trip-card-date">Ene 2026</span>
+                        </div>
+                        <h2 class="trip-card-title">Valeria del Mar</h2>
+                        <p class="trip-card-location">Costa Atlántica</p>
+                        <p class="trip-card-desc">De donde viene mi nombre</p>
+                    </div>
+                </article>
+                -->
+
+            </div>
+
+            <p class="moments-footer">~ Solo para nosotros ~</p>
+        </div>
+    </main>
+
+    <!-- Gallery Modal -->
+    <div id="gallery-modal" class="gallery-modal">
+        <div class="gallery-backdrop" onclick="closeGallery()"></div>
+        
+        <button class="gallery-close" onclick="closeGallery()">×</button>
+        
+        <div class="gallery-container">
+            <div class="gallery-header">
+                <h2 id="gallery-title">Villa Berna</h2>
+                <p id="gallery-subtitle">Carnaval 2026 · Valle de Calamuchita</p>
+            </div>
+            
+            <div class="gallery-main">
+                <button class="gallery-nav gallery-prev" onclick="changePhoto(-1)">‹</button>
+                
+                <div class="gallery-photo-container">
+                    <img id="gallery-photo" src="" alt="">
+                    <p id="gallery-caption"></p>
+                </div>
+                
+                <button class="gallery-nav gallery-next" onclick="changePhoto(1)">›</button>
+            </div>
+            
+            <div class="gallery-thumbnails" id="gallery-thumbnails">
+                <!-- Thumbnails se generan dinámicamente -->
+            </div>
+            
+            <div class="gallery-counter">
+                <span id="gallery-current">1</span> / <span id="gallery-total">12</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos de los viajes
+        const trips = {
+            'villa-berna': {
+                title: 'Villa Berna',
+                subtitle: 'Carnaval 2026 · Valle de Calamuchita',
+                photos: [
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-01.jpg', caption: 'Empanada y humita en Los Reartes' },
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-02.jpg', caption: 'La pileta del complejo' },
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-03.jpg', caption: 'Llegando a la cabaña' },
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-04.jpg', caption: 'Cabañas entre los pinos' },
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-05.jpg', caption: '🦚 Pavos reales paseando' },
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-06.jpg', caption: '🐑🐴 Ovejas y caballos' },
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-07.jpg', caption: 'Caballos pastando' },
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-08.jpg', caption: '🦙 La llama marrón' },
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-09.jpg', caption: '🦙 Mirando a cámara' },
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-10.jpg', caption: 'Vicuña blanca' },
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-11.jpg', caption: '❤️ Diego y Agus con la llama' },
+                    { url: 'https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/carnaval2026-villa_berna/villa-berna-12.jpg', caption: '🧉 Mate en la cabaña' }
+                ]
+            }
+        };
+
+        let currentTrip = null;
+        let currentPhotoIndex = 0;
+
+        function openGallery(tripId) {
+            currentTrip = trips[tripId];
+            currentPhotoIndex = 0;
+            
+            document.getElementById('gallery-title').textContent = currentTrip.title;
+            document.getElementById('gallery-subtitle').textContent = currentTrip.subtitle;
+            document.getElementById('gallery-total').textContent = currentTrip.photos.length;
+            
+            // Generar thumbnails
+            const thumbnailsContainer = document.getElementById('gallery-thumbnails');
+            thumbnailsContainer.innerHTML = currentTrip.photos.map((photo, index) => `
+                <img src="${photo.url}" 
+                     alt="" 
+                     class="gallery-thumb ${index === 0 ? 'active' : ''}"
+                     onclick="goToPhoto(${index})">
+            `).join('');
+            
+            updateGalleryPhoto();
+            document.getElementById('gallery-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGallery() {
+            document.getElementById('gallery-modal').classList.remove('active');
+            document.body.style.overflow = '';
+            currentTrip = null;
+        }
+
+        function updateGalleryPhoto() {
+            const photo = currentTrip.photos[currentPhotoIndex];
+            document.getElementById('gallery-photo').src = photo.url;
+            document.getElementById('gallery-caption').textContent = photo.caption;
+            document.getElementById('gallery-current').textContent = currentPhotoIndex + 1;
+            
+            // Update active thumbnail
+            document.querySelectorAll('.gallery-thumb').forEach((thumb, index) => {
+                thumb.classList.toggle('active', index === currentPhotoIndex);
+            });
+            
+            // Scroll thumbnail into view
+            const activeThumb = document.querySelector('.gallery-thumb.active');
+            if (activeThumb) {
+                activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+        }
+
+        function changePhoto(direction) {
+            currentPhotoIndex += direction;
+            if (currentPhotoIndex < 0) currentPhotoIndex = currentTrip.photos.length - 1;
+            if (currentPhotoIndex >= currentTrip.photos.length) currentPhotoIndex = 0;
+            updateGalleryPhoto();
+        }
+
+        function goToPhoto(index) {
+            currentPhotoIndex = index;
+            updateGalleryPhoto();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!currentTrip) return;
+            if (e.key === 'Escape') closeGallery();
+            if (e.key === 'ArrowLeft') changePhoto(-1);
+            if (e.key === 'ArrowRight') changePhoto(1);
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            if (!currentTrip) return;
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) changePhoto(1); // Swipe left, next photo
+                else changePhoto(-1); // Swipe right, prev photo
+            }
+        }
+    </script>
+</body>
+</html>
