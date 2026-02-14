@@ -21,7 +21,32 @@
     </nav>
 
     <main class="moments-page">
-        <div class="container">
+        
+        <!-- Password Overlay -->
+        <div id="password-overlay" class="password-overlay">
+            <div class="password-container">
+                <div class="password-icon">🔒</div>
+                <h2 class="password-title">Área Privada</h2>
+                <p class="password-subtitle">Este espacio es solo para Diego y Agus</p>
+                
+                <form class="password-form" onsubmit="checkPassword(event)">
+                    <input 
+                        type="password" 
+                        id="password-input" 
+                        class="password-input" 
+                        placeholder="Contraseña"
+                        autocomplete="off"
+                    >
+                    <button type="submit" class="password-btn">Entrar</button>
+                </form>
+                
+                <p id="password-error" class="password-error">Contraseña incorrecta</p>
+                
+                <a href="index.html" class="password-back">← Volver al inicio</a>
+            </div>
+        </div>
+
+        <div class="container" id="moments-content" style="display: none;">
             <header class="moments-header">
                 <h1 class="moments-title">Momentos 🦙</h1>
                 <p class="moments-subtitle">Un rincón secreto para guardar recuerdos</p>
@@ -111,6 +136,35 @@
     </div>
 
     <script>
+        // Verificar contraseña al cargar
+        const CORRECT_PASSWORD = 'valeria2026';
+        const PASSWORD_KEY = 'moments_access_granted';
+        
+        // Check if already authenticated
+        if (localStorage.getItem(PASSWORD_KEY) === 'true') {
+            showContent();
+        }
+        
+        function checkPassword(event) {
+            event.preventDefault();
+            const input = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('password-error');
+            
+            if (input === CORRECT_PASSWORD) {
+                localStorage.setItem(PASSWORD_KEY, 'true');
+                showContent();
+            } else {
+                errorMsg.classList.add('visible');
+                document.getElementById('password-input').value = '';
+                setTimeout(() => errorMsg.classList.remove('visible'), 3000);
+            }
+        }
+        
+        function showContent() {
+            document.getElementById('password-overlay').classList.add('hidden');
+            document.getElementById('moments-content').style.display = 'block';
+        }
+
         // Datos de los viajes
         const trips = {
             'villa-berna': {
