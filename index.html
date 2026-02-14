@@ -238,6 +238,77 @@
         </div>
     </footer>
 
+    <!-- EASTER EGG: Moments Section (Diego & Agus) -->
+    <section id="moments" class="section section-moments" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Momentos 🦙</h2>
+            <p class="section-subtitle">Villa Berna, febrero 2026 — Un finde de mates, llamas y naturaleza</p>
+            
+            <div class="moments-grid">
+                <div class="moment-card">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-01.jpg" alt="Almuerzo en Los Reartes" loading="lazy">
+                    <p class="moment-caption">Empanada y humita en Los Reartes</p>
+                </div>
+                <div class="moment-card">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-02.jpg" alt="Pileta" loading="lazy">
+                    <p class="moment-caption">La pileta del complejo</p>
+                </div>
+                <div class="moment-card">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-03.jpg" alt="Parque" loading="lazy">
+                    <p class="moment-caption">Llegando a la cabaña</p>
+                </div>
+                <div class="moment-card">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-04.jpg" alt="Cabañas" loading="lazy">
+                    <p class="moment-caption">Cabañas entre los pinos</p>
+                </div>
+                <div class="moment-card">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-05.jpg" alt="Pavos reales" loading="lazy">
+                    <p class="moment-caption">🦚 Pavos reales paseando</p>
+                </div>
+                <div class="moment-card">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-06.jpg" alt="Ovejas y caballos" loading="lazy">
+                    <p class="moment-caption">🐑🐴 Ovejas y caballos</p>
+                </div>
+                <div class="moment-card">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-07.jpg" alt="Caballos" loading="lazy">
+                    <p class="moment-caption">Caballos pastando</p>
+                </div>
+                <div class="moment-card">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-08.jpg" alt="Llama" loading="lazy">
+                    <p class="moment-caption">🦙 La llama marrón</p>
+                </div>
+                <div class="moment-card">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-09.jpg" alt="Llama mirando" loading="lazy">
+                    <p class="moment-caption">🦙 Mirando a cámara</p>
+                </div>
+                <div class="moment-card">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-10.jpg" alt="Vicuña" loading="lazy">
+                    <p class="moment-caption">Vicuña blanca</p>
+                </div>
+                <div class="moment-card featured">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-11.jpg" alt="Diego y Agus" loading="lazy">
+                    <p class="moment-caption">❤️ Diego y Agus con la llama</p>
+                </div>
+                <div class="moment-card">
+                    <img src="https://pub-a250cff05c54406192c79e8d64065ec4.r2.dev/villa-berna-12.jpg" alt="Mate" loading="lazy">
+                    <p class="moment-caption">🧉 Mate en la cabaña</p>
+                </div>
+            </div>
+            
+            <p class="moments-footer">~ Solo para nosotros ~</p>
+        </div>
+    </section>
+
     <script src="script.js"></script>
+    <script>
+        // Easter egg: Show #moments section only when hash is present
+        if (window.location.hash === '#moments') {
+            document.getElementById('moments').style.display = 'block';
+        }
+        window.addEventListener('hashchange', function() {
+            document.getElementById('moments').style.display = 
+                window.location.hash === '#moments' ? 'block' : 'none';
+        });
+    </script>
 </body>
 </html>
