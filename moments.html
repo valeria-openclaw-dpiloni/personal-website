@@ -25,24 +25,38 @@
         <!-- Password Overlay -->
         <div id="password-overlay" class="password-overlay">
             <div class="password-container">
-                <div class="password-icon">🔒</div>
+                
+                <div class="password-icon-wrapper">
+                    <span class="password-icon">🔒</span>
+                    <div class="password-icon-ring"></div>
+                </div>
+                
+                <span class="password-badge">Acceso Restringido</span>
+                
                 <h2 class="password-title">Área Privada</h2>
                 <p class="password-subtitle">Este espacio es solo para Diego y Agus</p>
                 
                 <form class="password-form" onsubmit="checkPassword(event)">
-                    <input 
-                        type="password" 
-                        id="password-input" 
-                        class="password-input" 
-                        placeholder="Contraseña"
-                        autocomplete="off"
-                    >
+                    <div class="password-input-wrapper">
+                        <span class="password-input-icon">🔑</span>
+                        <input 
+                            type="password" 
+                            id="password-input" 
+                            class="password-input" 
+                            placeholder="Ingresá la contraseña"
+                            autocomplete="off"
+                        >
+                    </div>
                     <button type="submit" class="password-btn">Entrar</button>
                 </form>
                 
-                <p id="password-error" class="password-error">Contraseña incorrecta</p>
+                <p id="password-error" class="password-error">
+                    <span>⚠️</span> Contraseña incorrecta
+                </p>
                 
-                <a href="index.html" class="password-back">← Volver al inicio</a>
+                <a href="index.html" class="password-back">
+                    <span>←</span> Volver al inicio
+                </a>
             </div>
         </div>
 
