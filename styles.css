@@ -756,6 +756,12 @@ body {
         text-align: center;
     }
     
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem 1rem;
+    }
+    
     .moments-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1rem;
